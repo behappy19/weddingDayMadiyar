@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Мадияр & Амина — 13.06.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:       #B8922A;
+    --gold-light: #D4AA50;
+    --gold-bright:#E8C96A;
+    --rose:       #1E5A7A;
+    --rose-light: #2E7AAA;
+    --cream:      #F0F6FA;
+    --bg:         #EBF3F8;
+    --text:       #0C1E2C;
+    --text-mid:   #2C4A5C;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px 100px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 80% 55% at 50% 0%,   rgba(30,90,122,0.18) 0%, transparent 65%),
+      radial-gradient(ellipse 70% 50% at 50% 100%,  rgba(184,146,42,0.18) 0%, transparent 65%),
+      radial-gradient(ellipse 55% 45% at 0%   50%,  rgba(46,122,170,0.12) 0%, transparent 65%),
+      radial-gradient(ellipse 55% 45% at 100% 50%,  rgba(30,90,122,0.12) 0%, transparent 65%),
+      var(--bg);
+  }
+
+  /* floating blobs */
+  .blob { position:absolute; pointer-events:none; opacity:0.18; }
+  .blob-1{ top:-70px;   left:-70px;  width:300px; animation:fA 9s ease-in-out infinite; }
+  .blob-2{ top:8%;      right:-90px; width:260px; animation:fB 11s ease-in-out infinite; }
+  .blob-3{ bottom:4%;   left:-50px;  width:220px; animation:fA 10s ease-in-out infinite reverse; }
+  .blob-4{ bottom:-50px;right:-60px; width:280px; animation:fB 12s ease-in-out infinite reverse; }
+  @keyframes fA{ 0%,100%{transform:translate(0,0)rotate(0deg)} 50%{transform:translate(14px,20px)rotate(9deg)} }
+  @keyframes fB{ 0%,100%{transform:translate(0,0)rotate(0deg)} 50%{transform:translate(-12px,16px)rotate(-7deg)} }
+
+  /* corners */
+  .corner{ position:absolute; width:90px; height:90px; opacity:0.55; }
+  .corner svg{ width:100%; height:100%; }
+  .corner--tl{ top:14px;    left:14px; }
+  .corner--tr{ top:14px;    right:14px; transform:scaleX(-1); }
+  .corner--bl{ bottom:14px; left:14px;  transform:scaleY(-1); }
+  .corner--br{ bottom:14px; right:14px; transform:scale(-1); }
+  @media(max-width:380px){ .corner{ width:58px; height:58px; } }
+
+  .pre-label{
+    font-size:10px; letter-spacing:.38em; text-transform:uppercase;
+    color:var(--rose); font-weight:400; margin-bottom:20px;
+    opacity:0; animation:fadeUp .9s .3s forwards; position:relative; z-index:1;
+  }
+
+  .names{
+    font-family:'Cormorant Garamond',serif; font-weight:300;
+    font-size:clamp(60px,18vw,124px); line-height:.92;
+    color:var(--text);
+    opacity:0; animation:fadeUp 1s .55s forwards;
+    position:relative; z-index:1;
+  }
+  .names em{ font-style:italic; color:var(--rose); }
+  .amp{ display:block; font-style:italic; font-size:.6em; color:var(--gold); line-height:1.15; }
+
+  .divider{
+    margin:26px auto; display:flex; align-items:center; gap:14px;
+    opacity:0; animation:fadeUp .9s .78s forwards; position:relative; z-index:1;
+  }
+  .dl{ width:56px; height:1px; }
+  .dl-l{ background:linear-gradient(to right,transparent,var(--gold)); }
+  .dl-r{ background:linear-gradient(to left, transparent,var(--gold)); }
+  .dgem{ width:8px; height:8px; background:var(--rose); transform:rotate(45deg); flex-shrink:0; }
+
+  .date-block{ opacity:0; animation:fadeUp .9s 1s forwards; position:relative; z-index:1; }
+  .date-main{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(22px,6vw,40px); font-weight:400; letter-spacing:.07em; color:var(--gold);
+  }
+  .date-sub{
+    font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--text-mid); opacity:.6; margin-top:6px;
+  }
+
+  .scroll-hint{
+    position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    opacity:0; animation:fadeIn 1s 2.2s forwards;
+  }
+  .scroll-hint span{ font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--text-mid); opacity:.45; }
+  .scroll-line{ width:1px; height:34px; background:linear-gradient(to bottom,var(--gold),transparent); animation:bob 2s 2.2s infinite; }
+  @keyframes bob{ 0%,100%{opacity:.4} 50%{opacity:1} }
+
+  /* ── QUOTE ── */
+  .quote-band{
+    position:relative; z-index:1;
+    background:linear-gradient(135deg,#E8F2F8,#D8EAF5 50%,#E8F2F8);
+    border-top:2px solid rgba(30,90,122,.25); border-bottom:2px solid rgba(30,90,122,.25);
+    padding:56px 24px; text-align:center; overflow:hidden;
+  }
+  .quote-band::before{
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at center,rgba(30,90,122,.08),transparent 70%);
+    pointer-events:none;
+  }
+  .quote-text{
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:clamp(18px,4.5vw,30px); font-weight:300; line-height:1.6;
+    color:var(--text); max-width:560px; margin:0 auto; position:relative; z-index:1;
+  }
+  .qm{ font-family:'Cormorant Garamond',serif; font-size:3em; color:var(--rose); line-height:0; vertical-align:-.35em; opacity:.5; }
+  .quote-source{
+    margin-top:14px; font-size:10px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--gold); font-family:'Jost',sans-serif; font-weight:400;
+  }
+
+  /* ── SHARED ── */
+  section{ position:relative; z-index:1; }
+  .eyebrow{ font-size:9px; letter-spacing:.38em; text-transform:uppercase; color:var(--rose); font-weight:400; display:block; margin-bottom:10px; }
+  .sec-title{ font-family:'Cormorant Garamond',serif; font-size:clamp(28px,7vw,48px); font-weight:300; color:var(--text); line-height:1.1; }
+
+  /* ── CARDS ── */
+  .details{ padding:72px 16px; max-width:880px; margin:0 auto; text-align:center; }
+  .details-header{ margin-bottom:44px; }
+
+  .cards{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+  .card{
+    background:#fff; border:1.5px solid rgba(30,90,122,.2); border-radius:3px;
+    padding:28px 14px 24px; text-align:center;
+    transition:transform .25s, box-shadow .25s;
+    box-shadow:0 2px 18px rgba(30,90,122,.07);
+    position:relative; overflow:hidden;
+  }
+  .card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--rose-light),var(--gold-bright)); }
+  @media(hover:hover){ .card:hover{ transform:translateY(-4px); box-shadow:0 8px 28px rgba(30,90,122,.14); } }
+
+  .card-icon{ width:36px; height:36px; margin:0 auto 14px; color:var(--rose); }
+  .card-label{ font-size:9px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; font-weight:400; }
+  .card-value{ font-family:'Cormorant Garamond',serif; font-size:clamp(18px,4vw,24px); font-weight:400; color:var(--text); line-height:1.3; }
+  .card-value small{ font-size:.58em; opacity:.5; display:block; font-family:'Jost',sans-serif; font-weight:300; margin-top:3px; }
+
+  /* ── ADDRESS ── */
+  .address-section{ padding:0 16px 72px; max-width:880px; margin:0 auto; }
+  .address-box{
+    background:linear-gradient(135deg,#fff,#EBF3F8);
+    border:1.5px solid rgba(30,90,122,.22); border-radius:3px;
+    padding:40px 24px; text-align:center;
+    position:relative; overflow:hidden;
+    box-shadow:0 2px 22px rgba(30,90,122,.1);
+  }
+  .address-box::before{
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 0%,rgba(30,90,122,.07),transparent 60%);
+    pointer-events:none;
+  }
+  .address-icon{ width:42px; height:42px; color:var(--rose); margin:0 auto 14px; }
+  .address-label{ font-size:9px; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); font-weight:400; margin-bottom:12px; display:block; }
+  .address-text{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(20px,5vw,30px); font-weight:400; color:var(--text); line-height:1.55;
+    position:relative; z-index:1;
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-section{
+    padding:72px 16px; text-align:center;
+    background:linear-gradient(135deg,#E0EDF5,#D5E8F2 50%,#E0EDF5);
+    border-top:1px solid rgba(30,90,122,.15); border-bottom:1px solid rgba(30,90,122,.15);
+  }
+  .countdown-header{ margin-bottom:40px; }
+  .countdown{ display:flex; justify-content:center; gap:8px; max-width:480px; margin:0 auto; }
+  @media(max-width:360px){ .countdown{ gap:5px; } }
+
+  .cd-unit{
+    flex:1; min-width:0; padding:20px 6px;
+    background:#fff; border:1.5px solid rgba(30,90,122,.2); border-radius:3px;
+    text-align:center; box-shadow:0 2px 14px rgba(30,90,122,.08);
+    position:relative; overflow:hidden;
+  }
+  .cd-unit::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--rose-light),var(--gold-bright)); }
+  .cd-num{ font-family:'Cormorant Garamond',serif; font-size:clamp(32px,8.5vw,52px); font-weight:300; color:var(--rose); line-height:1; display:block; }
+  .cd-label{ font-size:clamp(7px,1.8vw,9px); letter-spacing:.18em; text-transform:uppercase; color:var(--text-mid); opacity:.5; margin-top:5px; display:block; }
+
+  /* ── RSVP ── */
+  .rsvp-section{ padding:72px 16px; max-width:520px; margin:0 auto; text-align:center; }
+  .rsvp-section p{ font-size:15px; line-height:1.85; color:var(--text-mid); margin:22px 0 38px; }
+  .btn{
+    display:inline-block; padding:15px 38px;
+    background:linear-gradient(135deg,var(--rose),#0E3A5A);
+    color:#fff; font-family:'Jost',sans-serif; font-size:11px;
+    letter-spacing:.28em; text-transform:uppercase; text-decoration:none;
+    font-weight:400; border-radius:2px;
+    box-shadow:0 4px 22px rgba(30,90,122,.35);
+    transition:transform .25s, box-shadow .25s; cursor:pointer; border:none;
+  }
+  @media(hover:hover){ .btn:hover{ transform:translateY(-2px); box-shadow:0 8px 30px rgba(30,90,122,.45); } }
+
+  /* ── FOOTER ── */
+  footer{
+    background:linear-gradient(135deg,#3D1818,#2C1208);
+    padding:52px 24px; text-align:center;
+    border-top:2px solid rgba(30,90,122,.3);
+  }
+  .footer-ornament{ display:block; margin:0 auto 22px; opacity:.5; }
+  .footer-names{ font-family:'Cormorant Garamond',serif; font-size:clamp(26px,8vw,42px); font-style:italic; color:var(--gold-light); letter-spacing:.04em; }
+  footer p{ font-size:10px; letter-spacing:.25em; color:rgba(255,248,238,.3); margin-top:10px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp{ from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
+  @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
+  .reveal{ opacity:1; transform:none; transition:opacity .8s ease,transform .8s ease; }
+  .reveal.hidden{ opacity:0; transform:translateY(26px); }
+  .d1{ transition-delay:.1s; } .d2{ transition-delay:.2s; } .d3{ transition-delay:.3s; } .d4{ transition-delay:.4s; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+
+  <!-- Blobs -->
+  <svg class="blob blob-1" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="150" cy="150" rx="140" ry="110" fill="url(#b1)" transform="rotate(20 150 150)"/>
+    <defs><radialGradient id="b1"><stop offset="0%" stop-color="#1E5A7A"/><stop offset="100%" stop-color="#1E5A7A" stop-opacity="0"/></radialGradient></defs>
+  </svg>
+  <svg class="blob blob-2" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="130" cy="130" rx="120" ry="90" fill="url(#b2)" transform="rotate(-15 130 130)"/>
+    <defs><radialGradient id="b2"><stop offset="0%" stop-color="#D4AA50"/><stop offset="100%" stop-color="#D4AA50" stop-opacity="0"/></radialGradient></defs>
+  </svg>
+  <svg class="blob blob-3" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="110" cy="110" rx="100" ry="80" fill="url(#b3)" transform="rotate(10 110 110)"/>
+    <defs><radialGradient id="b3"><stop offset="0%" stop-color="#2E7AAA"/><stop offset="100%" stop-color="#2E7AAA" stop-opacity="0"/></radialGradient></defs>
+  </svg>
+  <svg class="blob blob-4" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="140" cy="140" rx="130" ry="100" fill="url(#b4)" transform="rotate(-25 140 140)"/>
+    <defs><radialGradient id="b4"><stop offset="0%" stop-color="#B8922A"/><stop offset="100%" stop-color="#B8922A" stop-opacity="0"/></radialGradient></defs>
+  </svg>
+
+  <!-- Corners -->
+  <div class="corner corner--tl"><svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 7L83 7" stroke="#B8872A" stroke-width="1.2"/><path d="M7 7L7 83" stroke="#B8872A" stroke-width="1.2"/>
+    <circle cx="7" cy="7" r="3" fill="#C94070"/>
+    <path d="M25 7L25 25L7 25" stroke="#B8872A" stroke-width="0.6" opacity="0.5"/>
+    <path d="M16 16Q27 7 33 18Q27 29 16 25Q9 21 16 16Z" stroke="#B8872A" stroke-width="0.7" fill="rgba(201,64,112,0.12)"/>
+    <path d="M50 7L50 12" stroke="#B8872A" stroke-width="0.5" opacity="0.3"/>
+    <path d="M7 50L12 50" stroke="#B8872A" stroke-width="0.5" opacity="0.3"/>
+  </svg></div>
+  <div class="corner corner--tr"><svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 7L83 7" stroke="#B8872A" stroke-width="1.2"/><path d="M7 7L7 83" stroke="#B8872A" stroke-width="1.2"/>
+    <circle cx="7" cy="7" r="3" fill="#C94070"/>
+    <path d="M25 7L25 25L7 25" stroke="#B8872A" stroke-width="0.6" opacity="0.5"/>
+    <path d="M16 16Q27 7 33 18Q27 29 16 25Q9 21 16 16Z" stroke="#B8872A" stroke-width="0.7" fill="rgba(201,64,112,0.12)"/>
+  </svg></div>
+  <div class="corner corner--bl"><svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 7L83 7" stroke="#B8872A" stroke-width="1.2"/><path d="M7 7L7 83" stroke="#B8872A" stroke-width="1.2"/>
+    <circle cx="7" cy="7" r="3" fill="#C94070"/>
+    <path d="M25 7L25 25L7 25" stroke="#B8872A" stroke-width="0.6" opacity="0.5"/>
+    <path d="M16 16Q27 7 33 18Q27 29 16 25Q9 21 16 16Z" stroke="#B8872A" stroke-width="0.7" fill="rgba(201,64,112,0.12)"/>
+  </svg></div>
+  <div class="corner corner--br"><svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 7L83 7" stroke="#B8872A" stroke-width="1.2"/><path d="M7 7L7 83" stroke="#B8872A" stroke-width="1.2"/>
+    <circle cx="7" cy="7" r="3" fill="#C94070"/>
+    <path d="M25 7L25 25L7 25" stroke="#B8872A" stroke-width="0.6" opacity="0.5"/>
+    <path d="M16 16Q27 7 33 18Q27 29 16 25Q9 21 16 16Z" stroke="#B8872A" stroke-width="0.7" fill="rgba(201,64,112,0.12)"/>
+  </svg></div>
+
+  <p class="pre-label">Той шақыруы</p>
+
+  <h1 class="names">
+    <em>Мадияр</em>
+    <span class="amp">&amp;</span>
+    <em>Амина</em>
+  </h1>
+
+  <div class="divider">
+    <div class="dl dl-l"></div>
+    <div class="dgem"></div>
+    <div class="dl dl-r"></div>
+  </div>
+
+  <div class="date-block">
+    <div class="date-main">13 маусым 2026</div>
+    <div class="date-sub">Семей қаласы · Қазақстан</div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Төмен</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══ QUOTE ══ -->
+<div class="quote-band reveal">
+  <p class="quote-text">
+    <span class="qm">"</span>
+    Жақсы жар — жарты ырыс, жақсы дос — бақыттың кілті
+    <span class="qm">"</span>
+  </p>
+  <p class="quote-source">Қазақ мақалы</p>
+</div>
+
+<!-- ══ DETAILS ══ -->
+<section class="details">
+  <div class="details-header reveal">
+    <span class="eyebrow">Той мәліметтері</span>
+    <h2 class="sec-title">Маңызды ақпарат</h2>
+  </div>
+  <div class="cards">
+    <div class="card reveal d1">
+      <svg class="card-icon" viewBox="0 0 38 38" fill="none" stroke="currentColor" stroke-width="1.4">
+        <rect x="4" y="8" width="30" height="26" rx="1"/>
+        <path d="M4 16h30"/><path d="M12 4v8"/><path d="M26 4v8"/>
+        <rect x="11" y="22" width="6" height="6" rx="0.5"/>
+      </svg>
+      <p class="card-label">Күні</p>
+      <p class="card-value">13 маусым<br>2026</p>
+    </div>
+    <div class="card reveal d2">
+      <svg class="card-icon" viewBox="0 0 38 38" fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="19" cy="19" r="14"/>
+        <path d="M19 9v10l6 4"/>
+      </svg>
+      <p class="card-label">Уақыты</p>
+      <p class="card-value">18:00<br><small>Той басталуы</small></p>
+    </div>
+    <div class="card reveal d3">
+      <svg class="card-icon" viewBox="0 0 38 38" fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="19" cy="17" r="5"/>
+        <path d="M19 4C12 4 7 9.8 7 16c0 9 12 20 12 20s12-11 12-20C31 9.8 26 4 19 4z"/>
+      </svg>
+      <p class="card-label">Қаласы</p>
+      <p class="card-value">Семей<br><small>Қазақстан</small></p>
+    </div>
+    <div class="card reveal d4">
+      <svg class="card-icon" viewBox="0 0 38 38" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M19 5L23 13L32 14.5L25.5 21L27 30L19 26L11 30L12.5 21L6 14.5L15 13Z"/>
+      </svg>
+      <p class="card-label">Киім үлгісі</p>
+      <p class="card-value">Салтанатты<br><small>Мерекелік киім</small></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADDRESS ══ -->
+<section class="address-section">
+  <div class="address-box reveal">
+    <svg class="address-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.3">
+      <path d="M22 4C14 4 8 10.5 8 18c0 11 14 24 14 24s14-13 14-24C36 10.5 30 4 22 4z"/>
+      <circle cx="22" cy="18" r="5"/>
+    </svg>
+    <span class="address-label">Той өтетін мекен-жай</span>
+    <p class="address-text">
+      Семей қаласы,<br>
+      Мажита Бегалина көшесі, 9
+    </p>
+  </div>
+</section>
+
+<!-- ══ COUNTDOWN ══ -->
+<section class="countdown-section">
+  <div class="countdown-header reveal">
+    <span class="eyebrow">Ерекше күнге дейін</span>
+    <h2 class="sec-title">Кері санақ</h2>
+  </div>
+  <div class="countdown reveal">
+    <div class="cd-unit"><span class="cd-num" id="cd-d">--</span><span class="cd-label">Күн</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><span class="cd-label">Сағат</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-m">--</span><span class="cd-label">Минут</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><span class="cd-label">Секунд</span></div>
+  </div>
+</section>
+
+<!-- ══ RSVP ══ -->
+<section class="rsvp-section">
+  <div class="reveal">
+    <span class="eyebrow">Растау</span>
+    <h2 class="sec-title">Келесіз бе?</h2>
+  </div>
+  <p class="reveal">Тойымызда сізді көргенімізге қуанышты боламыз. Жақсылап дайындалуымыз үшін қатысуыңызды алдын ала растауыңызды сұраймыз.</p>
+  <a href="tel:+" class="btn reveal">Қатысуды растау</a>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <svg class="footer-ornament" width="180" height="28" viewBox="0 0 180 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 14 Q22 4 45 14 Q68 24 90 14 Q112 4 135 14 Q158 24 180 14" stroke="#E8C96A" stroke-width="1.1"/>
+    <circle cx="45"  cy="14" r="2.5" fill="#1E5A7A"/>
+    <circle cx="90"  cy="14" r="3.5" fill="#E8C96A"/>
+    <circle cx="135" cy="14" r="2.5" fill="#1E5A7A"/>
+    <path d="M82 5 L90 14 L98 5"  stroke="#E8C96A" stroke-width="0.8" fill="none" opacity="0.6"/>
+    <path d="M82 23 L90 14 L98 23" stroke="#E8C96A" stroke-width="0.8" fill="none" opacity="0.6"/>
+  </svg>
+  <div class="footer-names">Мадияр &amp; Амина</div>
+  <p>13 · 06 · 2026 &nbsp;·&nbsp; Семей қаласы</p>
+</footer>
+
+<script>
+  var target = new Date('2026-06-13T18:00:00');
+  function tick() {
+    var now = new Date();
+    var diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-d').textContent = '00';
+      document.getElementById('cd-h').textContent = '00';
+      document.getElementById('cd-m').textContent = '00';
+      document.getElementById('cd-s').textContent = '00';
+      return;
+    }
+    var D = Math.floor(diff / 86400000);
+    var H = Math.floor((diff % 86400000) / 3600000);
+    var M = Math.floor((diff % 3600000) / 60000);
+    var S = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-d').textContent = D < 10 ? '0'+D : ''+D;
+    document.getElementById('cd-h').textContent = H < 10 ? '0'+H : ''+H;
+    document.getElementById('cd-m').textContent = M < 10 ? '0'+M : ''+M;
+    document.getElementById('cd-s').textContent = S < 10 ? '0'+S : ''+S;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // Scroll reveal — safe for local files on mobile
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    revealEls.forEach(el=>{ el.classList.add('hidden'); });
+    const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.remove('hidden');io.unobserve(x.target);}}),{threshold:.08});
+    revealEls.forEach(el=>io.observe(el));
+  }
+</script>
+</body>
+</html>
